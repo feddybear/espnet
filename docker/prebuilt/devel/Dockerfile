@@ -37,7 +37,8 @@ RUN if [ -z "$( which nvcc )" ]; then \
     echo "Make with options ${MY_OPTS}" && \
     ln -s /kaldi ./ && \
     ./setup_anaconda.sh /miniconda espnet 3.7.4 && \
-    make KALDI=/kaldi ${MY_OPTS}
+    make KALDI=/kaldi ${MY_OPTS} && \
+    make nkf.done
 
 RUN rm -rf ../espnet
 

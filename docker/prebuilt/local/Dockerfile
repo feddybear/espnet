@@ -35,7 +35,7 @@ RUN if [ -z "$( which nvcc )" ]; then \
         export CFLAGS="-I${CUDA_HOME}/include ${CFLAGS}" && \
         MY_OPTS="CUDA_VERSION=${CUDA_VER}" && \
         . ./setup_cuda_env.sh /usr/local/cuda;  \
-    fi; \ 
+    fi; \
     if [ "${CUDA_VER}" = "10.1" ]; then \
         # warpctc is not supported from Pytorch 1.3.1
         MY_OPTS="${MY_OPTS} TH_VERSION=1.6.0";  \
@@ -43,7 +43,8 @@ RUN if [ -z "$( which nvcc )" ]; then \
     echo "Make with options ${MY_OPTS}" && \
     ln -s /kaldi ./ && \
     ./setup_anaconda.sh /miniconda espnet 3.7.4 && \
-    make KALDI=/kaldi ${MY_OPTS}
+    make KALDI=/kaldi ${MY_OPTS} && \
+    make nkf.done
 
 RUN rm -rf ../espnet
 
