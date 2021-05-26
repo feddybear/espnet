@@ -29,7 +29,7 @@ RUN if [ -z "$( which nvcc )" ]; then \
         export CFLAGS="-I${CUDA_HOME}/include ${CFLAGS}" && \
         MY_OPTS="CUDA_VERSION=${CUDA_VER}" && \
         . ./setup_cuda_env.sh /usr/local/cuda;  \
-    fi; \ 
+    fi; \
     if [ "${CUDA_VER}" = "10.1" ]; then \
         # warpctc is not supported from Pytorch 1.3.1
         MY_OPTS="${MY_OPTS} TH_VERSION=1.6.0";  \
@@ -42,3 +42,5 @@ RUN if [ -z "$( which nvcc )" ]; then \
 RUN rm -rf ../espnet
 
 WORKDIR /
+
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]

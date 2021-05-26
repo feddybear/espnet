@@ -7,7 +7,7 @@ ENV DOCKER_BUILT_VER ${DOCKER_VER}}
 ARG NUM_BUILD_CORES=8
 ENV NUM_BUILD_CORES ${NUM_BUILD_CORES}
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install --no-install-recommends \ 
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install --no-install-recommends \
         automake \
         autoconf \
         apt-utils \
@@ -25,6 +25,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install --no-ins
         libsndfile1-dev \
         python2.7 \
         python3 \
+        python3-pip \
+        python3-dev \
         sox \
         subversion \
         unzip \
@@ -34,6 +36,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install --no-ins
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip and install jupyter
+RUN pip3 -q install pip --upgrade && \
+    pip3 install jupyter
 
 # Install Kaldi
 RUN git clone https://github.com/kaldi-asr/kaldi

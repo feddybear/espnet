@@ -1,7 +1,7 @@
 FROM espnet/espnet:runtime
 LABEL maintainer "Nelson Yalta <nyalta21@gmail.com>"
 
-## FROM CUDA 10.1 base [https://gitlab.com/nvidia/cuda/blob/ubuntu18.04/10.1/base/Dockerfile] 
+## FROM CUDA 10.1 base [https://gitlab.com/nvidia/cuda/blob/ubuntu18.04/10.1/base/Dockerfile]
 
 RUN apt-get update && apt-get install -y --no-install-recommends gnupg2 curl ca-certificates && \
     curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub | apt-key add - && \
@@ -78,3 +78,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
+
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
