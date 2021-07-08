@@ -1,3 +1,3 @@
 #!/bin/bash
 
-jupyter notebook --port=8080 --no-browser --ip=0.0.0.0 --allow-root
+jupyter lab --ip 0.0.0.0 --no-browser --port=$PORT0 --allow-root
