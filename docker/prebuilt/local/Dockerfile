@@ -48,4 +48,17 @@ RUN if [ -z "$( which nvcc )" ]; then \
 
 RUN rm -rf ../espnet
 
+RUN mkdir /root/.jupyter/
+COPY jupyter_notebook_config.py /root/.jupyter/
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
 WORKDIR /
+
+EXPOSE 8080
+
+ENV http_proxy=http://pkg.proxy.prod.jp.local:10080
+ENV https_proxy=https://pkg.proxy.prod.jp.local:10080
+ 
+#CMD ["jupyter", "notebook", "--port=8080", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+ENTRYPOINT ["/entrypoint.sh"]

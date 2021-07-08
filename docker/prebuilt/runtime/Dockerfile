@@ -39,7 +39,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install --no-ins
 
 # Upgrade pip and install jupyter
 RUN pip3 -q install pip --upgrade && \
-    pip3 install --upgrade nbconvert &&
+    pip3 install --upgrade nbconvert && \
     pip3 install jupyter
 
 # Install Kaldi
